@@ -10,14 +10,25 @@ using namespace std;
 class Solution{
     public:
     int findSingle(int n, int arr[]){
-        int ans=0;
-        for(int i=0;i<n;i++){
-            ans^=arr[i];
+        // code here
+        // for(int i=0;i<n;i++){
+        //     int count=0;
+        //     for(int j=0;j<n;j++){
+        //         if(arr[i]==arr[j]){
+        //         count++;
+        //         }
+        //     }
+        //     if(count%2!=0){
+        //         return arr[i];
+        //     }
+        // }
+        int res=arr[0];
+        for(int i=1;i<n;i++){
+            res=res^arr[i];
         }
-        return ans;
+        return res;
     }
-
-
+    
 };
 
 //{ Driver Code Starts.
