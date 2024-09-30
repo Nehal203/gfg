@@ -94,42 +94,53 @@ struct Node {
 */
 class Solution {
   public:
-    void inorder(Node* root, vector<int>& vec){
-        if(root==NULL)
-            return;
-        inorder(root->left, vec);
-        vec.push_back(root->data);
-        inorder(root->right, vec);
-    }
     // Function to return a list of integers denoting the node
     // values of both the BST in a sorted order.
+     void solve(Node* root,vector<int>& v)
+    {
+        if(!root)  return;
+        solve(root->left,v);
+        v.push_back(root->data);
+        solve(root->right,v);
+    }
     vector<int> merge(Node *root1, Node *root2) {
         // Your code here
-        vector<int> bs1;
-        vector<int> bs2;
+        vector<int> l1;
+        vector<int> l2;
+        solve(root1,l1);
+        solve(root2,l2);
+        int n = l1.size();
+        int m = l2.size();
+        int l=0,r=0;
         vector<int> ans;
-        inorder(root1, bs1);
-        inorder(root2, bs2);
-        int n = bs1.size();
-        int m = bs2.size();
-        int i =0, j = 0;
-        while(i<n && j<m){
-            if(bs1[i] > bs2[j]){
-                ans.push_back(bs2[j]);
-                j++;
+        while(l<n && r<m)
+        {
+            if(l1[l] < l2[r])
+            {
+                ans.push_back(l1[l]);
+                l++;
+            }
+            else if(l2[r]<l1[l])
+            {
+                ans.push_back(l2[r]);
+                r++;
             }
             else{
-                ans.push_back(bs1[i]);
-                i++;
+                ans.push_back(l1[l]);
+                ans.push_back(l2[r]);
+                l++;
+                r++;
             }
         }
-        while(i<n){
-            ans.push_back(bs1[i]);
-            i++;
+        while(l<n)
+        {
+            ans.push_back(l1[l]);
+            l++;
         }
-        while(j<m){
-            ans.push_back(bs2[j]);
-            j++;
+         while(r<m)
+        {
+            ans.push_back(l2[r]);
+            r++;
         }
         return ans;
     }
