@@ -17,11 +17,12 @@ public class Main {
             }
 
             Solution obj = new Solution();
-            int[] ans = obj.sortArr(nums);
+            obj.sortArr(nums);
             for (int x : nums) {
                 System.out.print(x + " ");
             }
             System.out.println();
+            System.out.println("~");
         }
     }
 }
@@ -30,19 +31,8 @@ public class Main {
 
 // User function Template for Java
 class Solution {
-    int[] sortArr(int[] arr) {
+    void sortArr(int[] arr) {
         // code here
-        // for(int i=0;i<arr.length-1;i++){
-        //     for(int j=i+1;j<arr.length;j++){
-        //         if(arr[i]>arr[j]){
-        //             int temp=arr[i];
-        //             arr[i]=arr[j];
-        //             arr[j]=temp;
-        //         }
-        //     }
-        // }
-        // return arr;
         Arrays.sort(arr);
-        return arr;
     }
 }
