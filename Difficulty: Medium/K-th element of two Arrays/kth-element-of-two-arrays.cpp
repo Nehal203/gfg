@@ -6,55 +6,33 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    int kthElement(int k, vector<int>& arr1, vector<int>& arr2) {
-        // code here
-        int m=0 ,n=0;
-        int current=0;
-        for (int i=0;i<k;i++)
-            {   if(arr1.size()>n && arr2.size()>m)
-                {
-                    if(arr2[m]<arr1[n])
-                        {   if(current<=arr2[m])
-                            {
-                                current=arr2[m];
-                                m++;
-                            }
-                            else{
-                            current=arr1[n];
-                            m++;}
-                        }
-                            
-                    else if(arr2[m]>arr1[n])
-                        {   if(current<=arr1[n])
-                                {
-                                    current=arr1[n];
-                                    n++;
-                                }
-                                else{
-                            current=arr2[m];
-                            n++;}
-                        }
-                        
-                    else
-                    {   current=arr1[n];
-                        m++;
-                        n++;
-                        i++;
-                    }
-                }
-                else if(arr1.size()>n && arr2.size()==m)
-                {
-                    current=arr1[n];
-                    n++;
-                }
-                else
-                {
-                    current=arr2[m];
-                    m++;
-                }
-               
+    int kthElement(vector<int>& a, vector<int>& b, int k) {
+        int n = a.size() ;
+        int m = b.size() ;
+        if(n < m) return kthElement(b , a , k) ;
+        int s = 0 ;
+        int e = min(m , k) ;
+        
+        while(s <= e){
+            int mid1 = s + (e - s) / 2 ;
+            int mid2 = k - mid1 ;
+            if(mid2 > n){
+                s = mid1 + 1 ;
+                continue ;
             }
-            return current;
+            int a1 = -1 ;
+            if(mid2 > 0) a1 = a[mid2 - 1] ;
+            int a2 = INT_MAX ;
+            if(mid2 < n) a2 = a[mid2] ;
+            int b1 = -1 ;
+            if(mid1 > 0) b1 = b[mid1 - 1] ;
+            int b2 = INT_MAX ;
+            if(mid1 < m) b2 = b[mid1] ;
+            if(a2 >= b1 && b2 >= a1) return max(b1 , a1) ;
+            else if(a2 < b1) e = mid1 - 1 ;
+            else s = mid1 + 1 ;
+        }
+        return -1 ;
     }
 };
 
@@ -71,22 +49,22 @@ int main() {
         cin.ignore();
         string input;
         int num;
-        vector<int> arr1, arr2;
+        vector<int> a, b;
 
         getline(cin, input);
         stringstream s2(input);
         while (s2 >> num) {
-            arr1.push_back(num);
+            a.push_back(num);
         }
 
         getline(cin, input);
         stringstream s3(input);
         while (s3 >> num) {
-            arr2.push_back(num);
+            b.push_back(num);
         }
 
         Solution ob;
-        cout << ob.kthElement(k, arr1, arr2) << endl;
+        cout << ob.kthElement(a, b, k) << endl << "~\n";
     }
     return 0;
 }
