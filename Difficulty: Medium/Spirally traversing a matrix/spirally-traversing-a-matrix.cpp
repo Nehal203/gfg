@@ -6,39 +6,40 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-   vector<int> spirallyTraverse(vector<vector<int> > &mat) {
-        // code here
+    vector<int> spirallyTraverse(vector<vector<int> > &mat) {
         vector<int>ans;
-        int n=mat.size();
-        int m=mat[0].size();
-        int cnt=n*m;
-        int l=0,r=m-1,u=0,d=n-1;
-        while(cnt>0){
-            // ltr
-            for(int j=l;j<=r && cnt>0;j++){
-                cnt--;
-                ans.push_back(mat[u][j]);
+        int n = mat.size();
+        int m = mat[0].size();
+        int str = 0 , enr = n-1 , stc = 0 , enc = m-1;
+        while(ans.size() < n*m){
+            for(int j=stc;j<=enc;j++){
+                if(ans.size() == n*m){
+                    break;
+                }
+                ans.push_back(mat[str][j]);
             }
-            u++;
-            // utd
-            for(int i=u;i<=d && cnt>0 ;i++){
-                cnt--;
-                ans.push_back(mat[i][r]);
+            str++;
+            for(int i=str;i<=enr;i++){
+                if(ans.size() == n*m){
+                    break;
+                }
+                ans.push_back(mat[i][enc]);
             }
-            r--;
-            // rtl
-            for(int j=r;j>=l && cnt>0;j--){
-                cnt--;
-                ans.push_back(mat[d][j]);
+            enc--;
+            for(int j=enc;j>=stc;j--){
+                if(ans.size() == n*m){
+                    break;
+                }
+                ans.push_back(mat[enr][j]);
             }
-            d--;
-            // dtu
-            for(int i=d;i>=u && cnt>0 ;i--){
-                cnt--;
-                ans.push_back(mat[i][l]);
+            enr--;
+            for(int i=enr;i>=str;i--){
+                if(ans.size() == n*m){
+                    break;                 }
+                ans.push_back(mat[i][stc]);
             }
-            l++;
-        }
+            stc++;
+        }        
         return ans;
     }
 };
@@ -51,9 +52,10 @@ int main() {
     while (t--) {
         int r, c;
         cin >> r >> c;
-        vector<vector<int>> matrix(r, vector<int>(c, 0));
+        vector<vector<int>> matrix(r);
 
         for (int i = 0; i < r; i++) {
+            matrix[i].assign(c, 0);
             for (int j = 0; j < c; j++) {
                 cin >> matrix[i][j];
             }
@@ -64,6 +66,9 @@ int main() {
         for (int i = 0; i < result.size(); ++i)
             cout << result[i] << " ";
         cout << endl;
+
+        cout << "~"
+             << "\n";
     }
     return 0;
 }
