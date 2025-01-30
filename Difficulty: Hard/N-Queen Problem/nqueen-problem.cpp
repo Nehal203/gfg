@@ -4,72 +4,95 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
 // } Driver Code Ends
 // User function Template for C++
 
-class Solution{
-public:
+class Solution {
+  public:
+  
+  vector<vector<int>>ans;
+    bool check(int i,int j,int n,vector<vector<int>> &grid){
+        //row,col,left upper diagonal,right upper diagonal
+        
+        //row
+        for(int col=0;col<j;col++){ if(grid[i][col]==1) return 0;}
+        //col
+        for(int row=0;row<i;row++){ if(grid[row][j]==1) return 0;}
+        
+        //upper left diagonal
+        int a=i,b=j;
+        while(a>-1 && b>-1){
+            a--; b--;
+            if(a>-1 && b>-1)
+            if(grid[a][b]==1) return 0;
+        }
+        
+         a=i,b=j;
+        while(a>-1 && a<n && b>-1 && b<n){
+            a++; b--;
+            if(a>-1 && a<n && b>-1 && b<n)
+            if(grid[a][b]==1) return 0;
+        }
+       
+        return 1;
+    }
+    void backtrack(int col,vector<vector<int>>& grid,vector<int>& path,int n){
+        if(path.size()==n){
+            ans.push_back(path);
+            return;
+        }
+        
+        //row traverse
+        for(int i=0;i<n;i++){
+            if(check(i,col,n,grid)){
+                grid[i][col]=1; path.push_back(i+1);
+                backtrack(col+1,grid,path,n);
+                grid[i][col]=0; path.pop_back();
+            }
+        }
+        return;
+    }
     vector<vector<int>> nQueen(int n) {
-        vector<vector<int>> ans;
-        vector<int> temp;
-        dfs(ans,temp,0,n);
-        // incrementing since ans in 0 indexed
-        for(auto &v:ans)
-            for(auto &x:v)
-                x++;
-        return ans;
-    }
-    void dfs(vector<vector<int>> &ans,vector<int> &temp,
-                int x,const int n){
-        // if x==n means it placed x==0,1,...,n-1 (n queens)
-        if(x==n){
-            ans.push_back(temp);
-            return ;
-        }
-        for(int i=0;i<n;i++){
-            // check if new queen can be placed at i
-            if(check(temp,i)){
-                temp.push_back(i);
-                dfs(ans,temp,x+1,n);
-                temp.pop_back();
-            }
-        }
-    }
-    bool check(vector<int> &temp,int x){
-        int n=temp.size();
-        bool ans=1;
-        for(int i=0;i<n;i++){
-            if(temp[i]==x || temp[i]-i+n==x || temp[i]+i-n==x){
-                ans=0;
-                break;
-            }
-        }
+        // code here
+        if(n==1) return {{1}};
+        
+        vector<vector<int>>grid(n,vector<int>(n,0));
+        vector<int>path;
+        backtrack(0,grid,path,n);    
+        if(ans.size()==0) return {};
         return ans;
     }
 };
 
+
+
 //{ Driver Code Starts.
 
-int main(){
+int main() {
     int t;
-    cin>>t;
-    while(t--){
+    cin >> t;
+    while (t--) {
         int n;
-        cin>>n;
-        
+        cin >> n;
+
         Solution ob;
         vector<vector<int>> ans = ob.nQueen(n);
-        if(ans.size() == 0)
-            cout<<-1<<"\n";
+        if (ans.size() == 0)
+            cout << -1 << "\n";
         else {
-            for(int i = 0;i < ans.size();i++){
-                cout<<"[";
-                for(int u: ans[i])
-                    cout<<u<<" ";
-                cout<<"] ";
+            sort(ans.begin(), ans.end());
+            for (int i = 0; i < ans.size(); i++) {
+                cout << "[";
+                for (int u : ans[i])
+                    cout << u << " ";
+                cout << "] ";
             }
-            cout<<endl;
+            cout << endl;
         }
+
+        cout << "~"
+             << "\n";
     }
     return 0;
 }
