@@ -9,20 +9,34 @@ class Solution {
   public:
     // Function to find the first non-repeating character in a string.
     char nonRepeatingChar(string &s) {
-        // Your code here
-         int arr[256]={0};
-        for(char c:s) {
-             arr[c]++;
+        
+        vector<int>count(256,0);
+        for(int i=0;i<s.size();i++){
+            count[s[i]]++;
         }
-        char ans;
-        for(char c:s) {
-            if(arr[c]==1) {
-                return c;
+        for(int i=0;i<s.size();i++){
+            if(count[s[i]]==1){
+                return s[i];
             }
         }
         return '$';
+        
     }
 };
+
+    //   //Your code here
+    //   vector<int>count(256,0);
+    //   for(int i=0;i<S.size();i++){
+    //       count[S[i]]++;
+    //   }
+    //   for(int i=0;i<S.size();i++){
+    //       if(count[S[i]]==1){
+    //           return S[i];
+    //       }
+    //   }
+    //   return '$';
+    // }
+
 
 //{ Driver Code Starts.
 
