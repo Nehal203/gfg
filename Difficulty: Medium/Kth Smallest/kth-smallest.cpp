@@ -6,6 +6,7 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 // User function template for C++
 
 class Solution {
@@ -14,26 +15,11 @@ class Solution {
     // k : find kth smallest element and return using this function
     int kthSmallest(vector<int> &arr, int k) {
         // code here
-        int maxi = -1;
-        for(auto &it : arr) {
-            maxi = max(maxi, it);
-        }
-        vector<int> hash(maxi + 1, 0);
-        for(int i = 0; i < arr.size(); i++) {
-            hash[arr[i]]++;
-        }
+        sort(arr.begin(),arr.end());
+        return arr[k-1];
         
-        int currPosCnt = 0;
-        for(int i = 0; i < hash.size(); i++) {
-            if(hash[i]) {
-                if(currPosCnt + hash[i] >= k) return i;
-                currPosCnt += hash[i];
-            }
-        }
-        return -1;
     }
 };
-
 
 
 //{ Driver Code Starts.
@@ -62,7 +48,7 @@ int main() {
         k = crr[0];
         int n = arr.size();
         Solution ob;
-        cout << ob.kthSmallest(arr, k) << endl;
+        cout << ob.kthSmallest(arr, k) << endl << "~\n";
     }
     return 0;
 }
