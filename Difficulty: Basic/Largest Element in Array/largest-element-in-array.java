@@ -40,6 +40,8 @@ class GFG {
             int res = obj.largest(arr);
 
             System.out.println(res);
+
+            System.out.println("~");
         }
     }
 }
@@ -51,13 +53,14 @@ class GFG {
 class Solution {
     public static int largest(int[] arr) {
         // code here
+        int n=arr.length;
         int max=arr[0];
-        for(int i=1;i<arr.length;i++){
-            if(max<arr[i]){
+        // int max=Integer.MIN_VALUE;
+        for(int i=0;i<n;i++){
+            if(arr[i]>max){
                 max=arr[i];
             }
         }
         return max;
-        
     }
 }
