@@ -26,10 +26,10 @@ class Solution {
     static int evenlyDivides(int n) {
         // code here
         int count=0;
-        int nums=n;
+        int num=n;
         while(n>0){
             int value=n%10;
-            if(value!=0 && nums%value==0){
+            if(value!=0 && num%value==0){
                 count+=1;
             }
             n=n/10;
