@@ -1,43 +1,22 @@
-//{ Driver Code Starts
-// Initial Template for Java
-import java.io.*;
-import java.util.*;
-import java.util.stream.Collectors;
-
-public class Main {
-
-    public static void main(String[] args) throws Exception {
-        Scanner sc = new Scanner(System.in);
-        int t = Integer.parseInt(sc.nextLine());
-        while (t-- > 0) {
-            String[] arr1Str = sc.nextLine().split(" ");
-            int[] arr = Arrays.stream(arr1Str).mapToInt(Integer::parseInt).toArray();
-            Solution ob = new Solution();
-            int ans = ob.getSecondLargest(arr);
-            System.out.println(ans);
-
-            System.out.println("~");
-        }
-    }
-}
-
-// } Driver Code Ends
-
-
-// User function Template for Java
 class Solution {
     public int getSecondLargest(int[] arr) {
-        int first = -1;
-        int second = -1;
-        for(int i=0;i<arr.length;i++){
-            if(arr[i]>first){
-                second = first;
-                first = arr[i];
+        // code here
+        int n=arr.length;
+        if(n<2){
+            return -1;
+        }
+        int sec=Integer.MIN_VALUE;
+        int max=Integer.MIN_VALUE;
+        
+        for(int i=0;i<n;i++){
+            if(arr[i]>max){
+                sec=max;
+                max=arr[i];
             }
-            else if(arr[i]>second && arr[i]!=first){
-                second = arr[i];
+            else if(arr[i]>sec && arr[i]!=max){
+                sec=arr[i];
             }
         }
-        return second;
+        return (sec==Integer.MIN_VALUE) ? -1:sec;
     }
 }
