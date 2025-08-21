@@ -1,4 +1,4 @@
-<h2><a href="https://www.geeksforgeeks.org/problems/convert-a-list-of-characters-into-a-string5142/0">Convert a list of characters into a String</a></h2><h3>Difficulty Level : Difficulty: Basic</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size:20px">Given a list of characters, merge all of them into a string.</span></p>
+<h2><a href="https://www.geeksforgeeks.org/problems/convert-a-list-of-characters-into-a-string5142/1?page=4&difficulty=School&sortBy=submissions">Convert a list of characters into a String</a></h2><h3>Difficulty Level : Difficulty: Basic</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size:20px">Given a list of characters, merge all of them into a string.</span></p>
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
